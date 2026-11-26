@@ -1,0 +1,28 @@
+name: Actual OCR and NLP synthetic regression
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "scripts/**"
+      - "examples/regression-*/**"
+      - ".github/workflows/model-regression.yml"
+permissions:
+  contents: read
+jobs:
+  synthetic_model_regression:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/fetch_assets.py
+      - run: python -m pip install '.[test]'
+      - run: python -m video_privacy.cli prepare-models --models .runtime/models
+      - run: python scripts/verify_cycle.py --models .runtime/models

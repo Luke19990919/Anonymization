@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Provider-independent local privacy findings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "frame_index", "width", "height", "review_required", "regions"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "frame_index": {"type": "integer", "minimum": 0},
+    "width": {"type": "integer", "minimum": 1},
+    "height": {"type": "integer", "minimum": 1},
+    "review_required": {"type": "boolean"},
+    "regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rect", "category", "evidence"],
+        "properties": {
+          "rect": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "integer", "minimum": 0}},
+          "category": {"enum": ["name", "account", "password", "email", "phone", "national_id", "address", "notification", "other_private"]},
+          "evidence": {"enum": ["field_label_and_pixels", "ocr_rule", "local_model", "validated_temporal_track"]}
+        }
+      }
+    }
+  }
+}

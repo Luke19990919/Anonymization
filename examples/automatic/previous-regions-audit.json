@@ -1,0 +1,65 @@
+{
+  "method": "Conservative replay of previous predicted rectangles with all low_confidence masks removed; not a new model inference run",
+  "cases": [
+    {
+      "id": "01",
+      "gold_instances": 144,
+      "covered_without_any_old_low_confidence_masks": 144,
+      "removed_mask_instances": 0
+    },
+    {
+      "id": "02",
+      "gold_instances": 288,
+      "covered_without_any_old_low_confidence_masks": 288,
+      "removed_mask_instances": 0
+    },
+    {
+      "id": "03",
+      "gold_instances": 288,
+      "covered_without_any_old_low_confidence_masks": 288,
+      "removed_mask_instances": 0
+    },
+    {
+      "id": "04",
+      "gold_instances": 288,
+      "covered_without_any_old_low_confidence_masks": 288,
+      "removed_mask_instances": 0
+    },
+    {
+      "id": "05",
+      "gold_instances": 1,
+      "covered_without_any_old_low_confidence_masks": 1,
+      "removed_mask_instances": 72
+    },
+    {
+      "id": "06",
+      "gold_instances": 24,
+      "covered_without_any_old_low_confidence_masks": 24,
+      "removed_mask_instances": 60
+    },
+    {
+      "id": "07",
+      "gold_instances": 288,
+      "covered_without_any_old_low_confidence_masks": 288,
+      "removed_mask_instances": 0
+    },
+    {
+      "id": "08",
+      "gold_instances": 288,
+      "covered_without_any_old_low_confidence_masks": 288,
+      "removed_mask_instances": 0
+    },
+    {
+      "id": "09",
+      "gold_instances": 144,
+      "covered_without_any_old_low_confidence_masks": 144,
+      "removed_mask_instances": 0
+    },
+    {
+      "id": "10",
+      "gold_instances": 0,
+      "covered_without_any_old_low_confidence_masks": 0,
+      "removed_mask_instances": 0
+    }
+  ]
+}

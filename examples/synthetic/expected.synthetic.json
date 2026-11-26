@@ -1,0 +1,39 @@
+{
+  "synthetic": true,
+  "frames": 12,
+  "fps": 4,
+  "single_frame_notification_index": 5,
+  "single_frame_password_index": 8,
+  "participant_sequence": [
+    "A",
+    "A",
+    "A",
+    "A",
+    "B",
+    "B",
+    "B",
+    "B",
+    "A",
+    "A",
+    "A",
+    "A"
+  ],
+  "notification_check_rect": [
+    620,
+    40,
+    920,
+    150
+  ],
+  "password_check_rect": [
+    40,
+    435,
+    900,
+    480
+  ],
+  "retained_content_check_rect": [
+    35,
+    575,
+    800,
+    615
+  ]
+}

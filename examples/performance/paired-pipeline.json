@@ -1,0 +1,86 @@
+{
+  "machine": "arm64",
+  "system": "Darwin",
+  "runs": [
+    {
+      "prefetch": false,
+      "elapsed_including_models_seconds": 34.84776887499902,
+      "frames": 3,
+      "performance": {
+        "stage_seconds": {
+          "decode_seconds": 0.005884041998797329,
+          "pixel_conversion_seconds": 0.009841042001426104,
+          "guard_hash_seconds": 0.020206959001370706,
+          "ocr_roundtrip_seconds": 14.625659208000798,
+          "classification_rules_seconds": 15.688265874998251,
+          "mask_render_seconds": 0.2425153340009274,
+          "encode_mux_seconds": 0.056627415999173536,
+          "final_mux_seconds": 0.15838741599873174,
+          "output_verification_seconds": 0.051944666000053985
+        },
+        "processing_seconds": 30.877071292001347,
+        "width": 2940,
+        "height": 1912,
+        "scope": "process_video only; excludes model initialization and final delivery copy",
+        "nested_stages": "OCR worker stages and NLP are subsets of parent timings",
+        "ocr_prefetch_enabled": false,
+        "overlap": "OCR and decoding may overlap classification/rendering; stage sums may exceed wall time"
+      },
+      "ocr_languages": [
+        "ch_tra",
+        "en"
+      ],
+      "nlp_inference_seconds": 15.685198625002158,
+      "nlp_inference_calls": 3,
+      "ocr_device": "mps",
+      "ocr_crop_cache_hits": 64,
+      "ocr_crop_cache_misses": 242,
+      "ocr_cpu_fallbacks": 0,
+      "ocr_detection_seconds": 5.237769751000087,
+      "ocr_recognition_seconds": 9.314598250000927
+    },
+    {
+      "prefetch": true,
+      "elapsed_including_models_seconds": 29.10579512500044,
+      "frames": 3,
+      "performance": {
+        "stage_seconds": {
+          "decode_seconds": 0.007217958000182989,
+          "pixel_conversion_seconds": 0.0060075830024288734,
+          "guard_hash_seconds": 0.021597042001303635,
+          "ocr_roundtrip_seconds": 16.062935209001807,
+          "classification_rules_seconds": 18.333859166001275,
+          "mask_render_seconds": 0.28784729200015136,
+          "encode_mux_seconds": 0.054011666999940644,
+          "final_mux_seconds": 0.14361533299961593,
+          "output_verification_seconds": 0.05349658299928706
+        },
+        "processing_seconds": 25.20209670800068,
+        "width": 2940,
+        "height": 1912,
+        "scope": "process_video only; excludes model initialization and final delivery copy",
+        "nested_stages": "OCR worker stages and NLP are subsets of parent timings",
+        "ocr_prefetch_enabled": true,
+        "overlap": "OCR and decoding may overlap classification/rendering; stage sums may exceed wall time"
+      },
+      "ocr_languages": [
+        "ch_tra",
+        "en"
+      ],
+      "nlp_inference_seconds": 18.331333375999748,
+      "nlp_inference_calls": 3,
+      "ocr_device": "mps",
+      "ocr_crop_cache_hits": 64,
+      "ocr_crop_cache_misses": 242,
+      "ocr_cpu_fallbacks": 0,
+      "ocr_detection_seconds": 5.791750083000807,
+      "ocr_recognition_seconds": 10.207122541998615
+    }
+  ],
+  "all_frame_masks_equal": true,
+  "scope": "paired local diagnostic; same input; no gold; not privacy accuracy acceptance",
+  "raw_text_saved": false,
+  "input_scope": "three frames of previously rendered video, authorized local diagnostic; not raw input or accuracy holdout",
+  "order": "sequential then prefetch; single pair; warm-up/order effects not eliminated",
+  "speed_claim": "local diagnostic only, not whole-video or cross-device guarantee"
+}

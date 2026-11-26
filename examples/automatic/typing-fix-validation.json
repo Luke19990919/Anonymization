@@ -1,0 +1,10 @@
+{
+  "frames": 480,
+  "targets": 708,
+  "covered_at_95pct": 708,
+  "misses": [],
+  "empty_account_frames_masked": [],
+  "empty_password_frames_masked": [],
+  "seconds": 1313.02,
+  "source": "fictional typing fixture; full-frame actual OCR and model inference; no gold passed to detector"
+}

@@ -1,0 +1,828 @@
+{
+  "version": "0.2.7rc2",
+  "date": "2026-11-26",
+  "tested_platform": "macOS-27.2.1-arm64-arm-64bit",
+  "python": "3.11.18",
+  "tests_passed": 190,
+  "real_model_synthetic_video": "v0.2.4: two new 288-frame clips, 742 target instances fully covered; v0.2.3 11-clip records retained as historical evidence",
+  "privacy_filter_source_revision": "f7f00ca7fb869683eb732c010299d901457f19c3",
+  "privacy_filter_model_revision": "7ffa9a043d54d1be65afb281eddf0ffbe629385b",
+  "privacy_filter_weights_sha256": "9c262cbe68a0c8a50590a648ef8341a2b7d3be1fa11dfb79893fe0b03ce57b5c",
+  "synthetic_pixel_checks": {
+    "scope": "bundled synthetic clip only; not a detection accuracy benchmark",
+    "frames": 12,
+    "notification_single_frame_covered": true,
+    "password_single_frame_covered": true,
+    "gaussian_blur_regions": {
+      "notification": {
+        "max_edge_strength_ratio": 0.008500821649426988
+      },
+      "password": {
+        "max_edge_strength_ratio": 0.0018111095367864091
+      },
+      "email": {
+        "max_edge_strength_ratio": 0.002286552681729315
+      },
+      "id": {
+        "max_edge_strength_ratio": 0.0029420412587374575
+      },
+      "address": {
+        "max_edge_strength_ratio": 0.0036537137501319217
+      },
+      "model_only_english_person": {
+        "max_edge_strength_ratio": 0.00465100261791495
+      }
+    },
+    "retained_footer_max_mean_error": 0.3894226579520697,
+    "retained_header_max_mean_error": 0.36944927536231886,
+    "same_participant_return_error": 0.023879716981132077,
+    "different_participant_pixel_difference": 3.441357114779874,
+    "model_only_person_mask_applied": true,
+    "raw_sensitive_text_absent_from_report": true
+  },
+  "limitations": [
+    "real participant footage not evaluated",
+    "Windows and Linux not tested",
+    "OCR/model may miss and overmask text",
+    "notification detection is heuristic, not universal",
+    "participant aliases and identity links require human review",
+    "no speech de-identification; web mode removes all audio",
+    "Gaussian blur does not guarantee irreversible removal"
+  ],
+  "bundle_excludes": [
+    "model weights",
+    "Python environments",
+    "private recordings",
+    "private participant mappings"
+  ],
+  "mask_style": "gaussian_blur",
+  "compatibility_download": "previous ZIP links refreshed with v0.2.6 contents",
+  "blur_radius_min_pixels": 24,
+  "blur_radius_max_pixels": 80,
+  "blur_feather_pixels": 16,
+  "blur_uses_original_pixels": true,
+  "irreversible_redaction_guaranteed": false,
+  "automatic_validation": {
+    "scope": "10 fictional 6-second screen recordings; coordinates evaluated after inference, never supplied to detection",
+    "criterion": "at least 95% of each gold target rectangle covered by predicted mask core; does not prove unreadability or irreversible removal",
+    "cases": [
+      {
+        "id": "01",
+        "seconds": 85.5,
+        "gold_target_instances": 144,
+        "covered_at_95pct": 144,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 0
+      },
+      {
+        "id": "02",
+        "seconds": 91.47,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "03",
+        "seconds": 146.65,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 3
+      },
+      {
+        "id": "04",
+        "seconds": 132.58,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "05",
+        "seconds": 227.78,
+        "gold_target_instances": 1,
+        "covered_at_95pct": 1,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": 0.001549479166666667,
+        "inferred_participants": 0
+      },
+      {
+        "id": "06",
+        "seconds": 281.19,
+        "gold_target_instances": 24,
+        "covered_at_95pct": 24,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": 0.0015494791666666667,
+        "inferred_participants": 0
+      },
+      {
+        "id": "07",
+        "seconds": 266.92,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "08",
+        "seconds": 113.51,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "09",
+        "seconds": 118.09,
+        "gold_target_instances": 144,
+        "covered_at_95pct": 144,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 0
+      },
+      {
+        "id": "10",
+        "seconds": 103.2,
+        "gold_target_instances": 0,
+        "covered_at_95pct": 0,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": 0.0,
+        "inferred_participants": 0
+      }
+    ],
+    "identity_cases": [
+      {
+        "id": "02",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "failures": []
+      },
+      {
+        "id": "03",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "failures": []
+      },
+      {
+        "id": "04",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "failures": []
+      },
+      {
+        "id": "07",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "failures": []
+      },
+      {
+        "id": "08",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "failures": []
+      }
+    ]
+  },
+  "browser_qa": {
+    "local_upload": true,
+    "real_processing_progress": true,
+    "preview": true,
+    "downloaded_frames": 72,
+    "downloaded_audio_tracks": 0,
+    "process_next": true,
+    "console_errors": 0
+  },
+  "local_web_server": "127.0.0.1; launchers use fixed port 8765; same-version repeated launch reuses verified service",
+  "default_audio": "drop",
+  "baseline_automatic_validation_version": "0.2.0",
+  "notification_false_positive_fix": {
+    "id": "06",
+    "seconds": 106.61,
+    "gold_target_instances": 24,
+    "covered_at_95pct": 24,
+    "misses": [],
+    "negative_frame_mean_mask_fraction": 0.0,
+    "inferred_participants": 0
+  },
+  "low_confidence_policy": "automatic mode masks only when fields/rules/model provide sensitive evidence, not solely OCR confidence; manual mode unchanged",
+  "prior_regions_audit": {
+    "method": "Conservative replay of previous predicted rectangles with all low_confidence masks removed; not a new model inference run",
+    "cases": [
+      {
+        "id": "01",
+        "gold_instances": 144,
+        "covered_without_any_old_low_confidence_masks": 144,
+        "removed_mask_instances": 0
+      },
+      {
+        "id": "02",
+        "gold_instances": 288,
+        "covered_without_any_old_low_confidence_masks": 288,
+        "removed_mask_instances": 0
+      },
+      {
+        "id": "03",
+        "gold_instances": 288,
+        "covered_without_any_old_low_confidence_masks": 288,
+        "removed_mask_instances": 0
+      },
+      {
+        "id": "04",
+        "gold_instances": 288,
+        "covered_without_any_old_low_confidence_masks": 288,
+        "removed_mask_instances": 0
+      },
+      {
+        "id": "05",
+        "gold_instances": 1,
+        "covered_without_any_old_low_confidence_masks": 1,
+        "removed_mask_instances": 72
+      },
+      {
+        "id": "06",
+        "gold_instances": 24,
+        "covered_without_any_old_low_confidence_masks": 24,
+        "removed_mask_instances": 60
+      },
+      {
+        "id": "07",
+        "gold_instances": 288,
+        "covered_without_any_old_low_confidence_masks": 288,
+        "removed_mask_instances": 0
+      },
+      {
+        "id": "08",
+        "gold_instances": 288,
+        "covered_without_any_old_low_confidence_masks": 288,
+        "removed_mask_instances": 0
+      },
+      {
+        "id": "09",
+        "gold_instances": 144,
+        "covered_without_any_old_low_confidence_masks": 144,
+        "removed_mask_instances": 0
+      },
+      {
+        "id": "10",
+        "gold_instances": 0,
+        "covered_without_any_old_low_confidence_masks": 0,
+        "removed_mask_instances": 0
+      }
+    ]
+  },
+  "typing_input_validation": {
+    "frames": 480,
+    "targets": 708,
+    "covered_at_95pct": 708,
+    "misses": [],
+    "empty_account_frames_masked": [],
+    "empty_password_frames_masked": [],
+    "seconds": 374.93,
+    "source": "fictional typing fixture; full-frame actual OCR and model inference; no gold passed to detector"
+  },
+  "input_field_policy": "closed flat input surfaces: detect foreground, exclude isolated tall colored caret, mask content from first character; exclude empty OCR candidate text; unknown layout retains conservative field guard",
+  "speed_validation": {
+    "baseline_version": "0.2.2",
+    "accelerated_version": "0.2.3",
+    "baseline_seconds": 1313.02,
+    "accelerated_seconds": 374.93,
+    "speedup": 3.5,
+    "scope": "same 20-second 480-frame fictional typing clip on this Mac; not a universal performance guarantee",
+    "frame_sampling": "none",
+    "ocr_device": "mps",
+    "ocr_crop_cache_hits": 4442,
+    "ocr_crop_cache_misses": 753,
+    "ocr_cpu_fallbacks": 0
+  },
+  "accelerated_dataset_validation": {
+    "cases": [
+      {
+        "id": "01",
+        "seconds": 20.51,
+        "gold_target_instances": 144,
+        "covered_at_95pct": 144,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 0
+      },
+      {
+        "id": "02",
+        "seconds": 20.49,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "03",
+        "seconds": 27.48,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 3
+      },
+      {
+        "id": "04",
+        "seconds": 23.57,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "05",
+        "seconds": 28.41,
+        "gold_target_instances": 1,
+        "covered_at_95pct": 1,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": 0.0,
+        "inferred_participants": 0
+      },
+      {
+        "id": "06",
+        "seconds": 26.15,
+        "gold_target_instances": 24,
+        "covered_at_95pct": 24,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": 0.0,
+        "inferred_participants": 0
+      },
+      {
+        "id": "07",
+        "seconds": 58.23,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "08",
+        "seconds": 19.56,
+        "gold_target_instances": 288,
+        "covered_at_95pct": 288,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 1
+      },
+      {
+        "id": "09",
+        "seconds": 22.06,
+        "gold_target_instances": 144,
+        "covered_at_95pct": 144,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": null,
+        "inferred_participants": 0
+      },
+      {
+        "id": "10",
+        "seconds": 19.23,
+        "gold_target_instances": 0,
+        "covered_at_95pct": 0,
+        "misses": [],
+        "negative_frame_mean_mask_fraction": 0.0,
+        "inferred_participants": 0
+      }
+    ],
+    "identity_checks": [
+      {
+        "id": "02",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "errors": []
+      },
+      {
+        "id": "03",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "errors": []
+      },
+      {
+        "id": "04",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "errors": []
+      },
+      {
+        "id": "07",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "errors": []
+      },
+      {
+        "id": "08",
+        "name_instances": 72,
+        "correct_alias": 72,
+        "errors": []
+      }
+    ]
+  },
+  "ocr_acceleration": "Metal on supported Macs with CPU retry of same frame on failure; byte-identical recognition-crop cache scoped to worker; all decoded frames processed",
+  "browser_restore_qa": {
+    "progress_after_reload": true,
+    "done_after_reload": true,
+    "next_video": true,
+    "console_errors": 0
+  },
+  "manual_cpu_regression": "12-frame synthetic pixel/report verification passed",
+  "transition_validation": {
+    "version": "0.2.4",
+    "criterion": "100% annotated rectangle coverage by mask core; all frames; not an irreversible-removal guarantee",
+    "password": {
+      "version": "0.2.4",
+      "case": "password",
+      "frames": 288,
+      "target_instances": 576,
+      "fully_covered_instances": 576,
+      "misses": [],
+      "visible_password_frames": 144,
+      "visible_password_frames_fully_masked": 144,
+      "first_reveal_frames": [
+        {
+          "frame": 48,
+          "fully_masked": true
+        },
+        {
+          "frame": 192,
+          "fully_masked": true
+        }
+      ],
+      "frames_with_masks_but_no_gold_targets": [],
+      "seconds": 74.04,
+      "criterion": "100% gold rectangle coverage by mask core; not irreversible data removal proof",
+      "gold_passed_to_detector": false
+    },
+    "notification": {
+      "version": "0.2.4",
+      "case": "notification",
+      "frames": 288,
+      "target_instances": 166,
+      "fully_covered_instances": 166,
+      "misses": [],
+      "visible_password_frames": 0,
+      "visible_password_frames_fully_masked": 0,
+      "first_reveal_frames": [],
+      "frames_with_masks_but_no_gold_targets": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267
+      ],
+      "seconds": 87.81,
+      "criterion": "100% gold rectangle coverage by mask core; not irreversible data removal proof",
+      "gold_passed_to_detector": false
+    },
+    "notification_v023_baseline": {
+      "version": "0.2.3",
+      "case": "notification",
+      "frames": 288,
+      "target_instances": 166,
+      "fully_covered_instances": 158,
+      "misses": [
+        {
+          "frame": 49,
+          "seconds": 2.0416666666666665,
+          "category": "notification",
+          "coverage": 0.0
+        },
+        {
+          "frame": 50,
+          "seconds": 2.0833333333333335,
+          "category": "notification",
+          "coverage": 0.237701
+        },
+        {
+          "frame": 130,
+          "seconds": 5.416666666666667,
+          "category": "notification",
+          "coverage": 0.237701
+        },
+        {
+          "frame": 131,
+          "seconds": 5.458333333333333,
+          "category": "notification",
+          "coverage": 0.0
+        },
+        {
+          "frame": 169,
+          "seconds": 7.041666666666667,
+          "category": "notification",
+          "coverage": 0.0
+        },
+        {
+          "frame": 170,
+          "seconds": 7.083333333333333,
+          "category": "notification",
+          "coverage": 0.258322
+        },
+        {
+          "frame": 250,
+          "seconds": 10.416666666666666,
+          "category": "notification",
+          "coverage": 0.245187
+        },
+        {
+          "frame": 251,
+          "seconds": 10.458333333333334,
+          "category": "notification",
+          "coverage": 0.0
+        }
+      ],
+      "visible_password_frames": 0,
+      "visible_password_frames_fully_masked": 0,
+      "first_reveal_frames": [],
+      "frames_with_masks_but_no_gold_targets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287
+      ],
+      "seconds": 87.13,
+      "criterion": "100% gold rectangle coverage by mask core; not irreversible data removal proof",
+      "gold_passed_to_detector": false
+    },
+    "legacy_typing_render_replay": {
+      "frames": 480,
+      "decoded_pixels_identical_to_v023": true,
+      "timestamps_identical": true,
+      "scope": "render-only replay using saved v0.2.3 masks; no new OCR/model inference"
+    },
+    "models_received_gold": false,
+    "scope": "actual model inference on the two new fixtures; legacy typing is render-only replay; unknown notifications remain unverified"
+  },
+  "notification_motion_protection": {
+    "scope": "recognized right-edge horizontal notifications",
+    "lookback_seconds": 0.75,
+    "linger_seconds": 0.75,
+    "raw_frame_memory_cap_bytes": 1610612736,
+    "raw_frames_spooled_to_disk": false,
+    "tradeoff": "short background masking before/after recognition; cannot protect events never recognized or animations exceeding evidence window"
+  },
+  "password_display_validation": {
+    "frames": 288,
+    "visible_password_frames": 144,
+    "visible_password_fully_covered": 144,
+    "dot_frames": 144,
+    "dot_frames_without_extra_password_mask": 144,
+    "account_fully_covered": 288,
+    "first_reveal_frames": [
+      {
+        "frame": 48,
+        "protected": true
+      },
+      {
+        "frame": 192,
+        "protected": true
+      }
+    ],
+    "first_hide_frames": [
+      {
+        "frame": 144,
+        "unmasked": true
+      },
+      {
+        "frame": 240,
+        "unmasked": true
+      }
+    ],
+    "failures": [],
+    "seconds": 73.13,
+    "criterion": "plaintext/account: 100% annotated rectangle core coverage; dot phase: no mask intersects password input",
+    "gold_passed_to_detector": false,
+    "render_profile": {
+      "paint_only_seconds": {
+        "old": 4.307619870058261,
+        "new": 4.275649661925854
+      },
+      "frames_requiring_any_blur": {
+        "old": 288,
+        "new": 288
+      },
+      "mask_rectangles_drawn": {
+        "old": 720,
+        "new": 576
+      },
+      "interpretation": "account remains sensitive in every frame; skipping password dots does not eliminate full-frame blur/export work; timing is a local paired rendering microbenchmark, not a guaranteed speedup"
+    }
+  },
+  "startup_policy": "macOS detached service; double-click launcher after reboot; version-checked reuse; Windows foreground launcher",
+  "release_status": "blocked; known privacy failures; candidate only",
+  "privacy_acceptance_passed": false,
+  "new_features": {
+    "performance_stage_timing": true,
+    "ordered_one_frame_ocr_prefetch": true,
+    "easyocr_min_size": 0,
+    "experimental_search_context_default": false,
+    "apple_vision_default": false
+  },
+  "current_validation_scope": "190 Python tests, Node ETA, actual EasyOCR/Privacy Filter synthetic stacked-field and single-frame branded notification regressions; not global privacy acceptance",
+  "experimental_search_failure": "eight-frame rendered-output diagnostic still loses field location under alias/capture overlays and misses suggestion text; default remains disabled",
+  "field_regression": {
+    "frames": 32,
+    "targets": 50,
+    "baseline_version": "0.2.6",
+    "baseline_missed_targets": 20,
+    "current_missed_targets": 0,
+    "gold_passed_to_detector": false
+  },
+  "branded_notification_regression": {
+    "frames": 24,
+    "visible_instances": 3,
+    "misses": 0,
+    "empty_frame_false_masks_before": 19,
+    "empty_frame_false_masks_after": 0,
+    "scope": "exact white background only"
+  },
+  "verified_cycle_source_sha256": "64164712f104403b9d276d8e1943d74d71599e60d95c0be08e867aaa7349db67",
+  "repair_executor_connected": false,
+  "remote_repository": "https://github.com/Luke19990919/Anonymization",
+  "ci_execution_verified": false
+}

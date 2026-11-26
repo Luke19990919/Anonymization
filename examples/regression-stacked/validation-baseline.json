@@ -1,0 +1,94 @@
+{
+  "program_version": "0.2.6",
+  "frames": 32,
+  "target_instances": 50,
+  "misses": [
+    {
+      "frame": 1,
+      "coverage": 0.0
+    },
+    {
+      "frame": 2,
+      "coverage": 0.0
+    },
+    {
+      "frame": 3,
+      "coverage": 0.0
+    },
+    {
+      "frame": 4,
+      "coverage": 0.0
+    },
+    {
+      "frame": 5,
+      "coverage": 0.0
+    },
+    {
+      "frame": 6,
+      "coverage": 0.0
+    },
+    {
+      "frame": 7,
+      "coverage": 0.0
+    },
+    {
+      "frame": 8,
+      "coverage": 0.0
+    },
+    {
+      "frame": 11,
+      "coverage": 0.0
+    },
+    {
+      "frame": 12,
+      "coverage": 0.0
+    },
+    {
+      "frame": 13,
+      "coverage": 0.0
+    },
+    {
+      "frame": 14,
+      "coverage": 0.0
+    },
+    {
+      "frame": 15,
+      "coverage": 0.0
+    },
+    {
+      "frame": 16,
+      "coverage": 0.0
+    },
+    {
+      "frame": 17,
+      "coverage": 0.0
+    },
+    {
+      "frame": 18,
+      "coverage": 0.0
+    },
+    {
+      "frame": 19,
+      "coverage": 0.0
+    },
+    {
+      "frame": 22,
+      "coverage": 0.0
+    },
+    {
+      "frame": 23,
+      "coverage": 0.0
+    },
+    {
+      "frame": 24,
+      "coverage": 0.0
+    }
+  ],
+  "empty_mask_frames": [],
+  "gold_passed_to_detector": false,
+  "actual_model_inference": true,
+  "scope": "fictional stacked phone/email fixture; not unknown-video acceptance",
+  "performance": {
+    "baseline_elapsed_including_models_seconds": 28.18910991700068
+  }
+}
