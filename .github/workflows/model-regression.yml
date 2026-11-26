@@ -19,10 +19,24 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - run: python scripts/fetch_assets.py
       - run: python -m pip install '.[test]'
+      - uses: actions/cache@v4
+        with:
+          path: .runtime/models
+          key: public-models-${{ runner.os }}-${{ hashFiles('src/video_privacy/models.py', 'pyproject.toml') }}
       - run: python -m video_privacy.cli prepare-models --models .runtime/models
       - run: python scripts/verify_cycle.py --models .runtime/models
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: synthetic-model-evidence
+          path: |
+            .runtime/verify-cycles/*/result.json
+            .runtime/verify-cycles/*/fixture/validation.json
+            .runtime/verify-cycles/*/notifications/validation.json

@@ -35,6 +35,13 @@ def main() -> int:
         with (folder/f'{name}.log').open('wb') as log:
             result=subprocess.run(command,cwd=ROOT,env=environment,stdout=log,stderr=subprocess.STDOUT,check=False)
         stages.append({'name':name,'passed':result.returncode==0,'exit_code':result.returncode})
+        report_name={'actual_ocr_nlp_regression':'fixture','actual_notification_regression':'notifications'}.get(name)
+        if report_name:
+            numerical=folder/report_name/'validation.json'
+            if numerical.is_file():
+                measured=json.loads(numerical.read_text())
+                fields=('program_version','frames','target_instances','misses','empty_mask_frames','gold_passed_to_detector')
+                print(json.dumps({'diagnostic_for':name,**{key:measured[key] for key in fields}}),flush=True)
         print(json.dumps(stages[-1]),flush=True)
         if result.returncode!=0:break
     release_errors=check(ROOT)
