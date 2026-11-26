@@ -1,0 +1,53 @@
+name: Actual OCR and NLP synthetic regression
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "scripts/**"
+      - "examples/regression-*/**"
+      - ".github/workflows/model-regression.yml"
+permissions:
+  contents: read
+jobs:
+  synthetic_model_regression:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/fetch_assets.py
+      - run: python -m pip install '.[test]'
+      - uses: actions/cache/restore@v4
+        id: public-model-cache
+        with:
+          path: .runtime/models
+          key: public-models-${{ runner.os }}-${{ hashFiles('src/video_privacy/models.py', 'constraints-tested.txt') }}
+      - run: python -m video_privacy.cli prepare-models --models .runtime/models
+        id: prepare-public-models
+      - run: python scripts/verify_cycle.py --models .runtime/models
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: synthetic-model-evidence
+          path: |
+            .runtime/verify-cycles/*/result.json
+            .runtime/verify-cycles/*/fixture/validation.json
+            .runtime/verify-cycles/*/notifications/validation.json
+            .runtime/verify-cycles/*/notifications/input.mp4
+            .runtime/verify-cycles/*/notifications/output.mp4
+            .runtime/verify-cycles/*/notifications/output.report.json
+            .runtime/verify-cycles/*/notifications/gold.json
+      - uses: actions/cache/save@v4
+        if: always() && steps.prepare-public-models.outcome == 'success' && steps.public-model-cache.outputs.cache-hit != 'true'
+        with:
+          path: .runtime/models
+          key: public-models-${{ runner.os }}-${{ hashFiles('src/video_privacy/models.py', 'constraints-tested.txt') }}

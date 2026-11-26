@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>影片遮罩設定工具</title>
+<style>
+*{box-sizing:border-box}body{font:16px/1.6 system-ui,sans-serif;background:#f3f5f8;color:#172236;margin:0}main{max-width:1120px;margin:auto;padding:28px}h1{margin-top:0}section{background:white;border:1px solid #d9dfe8;border-radius:12px;padding:20px;margin:18px 0}label{display:block;margin:12px 0 6px;font-weight:600}input,select,textarea,button{font:inherit}textarea{width:100%;padding:10px}button{padding:8px 16px;background:#174eb6;color:white;border:0;border-radius:6px;cursor:pointer}button:disabled{opacity:.4}video,canvas{display:block;max-width:100%;margin:12px auto}video{max-height:230px}canvas{width:100%;height:auto;touch-action:none;cursor:crosshair;background:#e5e9ef}.row{display:flex;gap:18px;flex-wrap:wrap}.row>div{flex:1;min-width:220px}.note{color:#4c5a71}li{margin:8px 0}li button{margin-left:12px;padding:2px 10px;background:#596579}#status{min-height:28px}code{background:#edf1f7;padding:2px 5px}a{color:#174eb6}
+</style>
+<main><h1>影片遮罩設定工具</h1>
+<p>在本機圈選通知與敏感表單區域，建立固定人物代號，再匯出 JSON 設定。程式輸出使用柔化高斯模糊；本頁紅框僅供圈選預覽。本頁不會上傳影片，也不會產出去識別化影片。</p>
+<section><h2>1. 載入影片並圈選區域</h2>
+<label for="file">選擇本機影片</label><input id="file" type="file" accept="video/*">
+<video id="video" controls muted></video>
+<p class="note">暫停在代表性畫面，於下方拖曳框選。通知區域應涵蓋完整通知卡及可能出現的位置；帳密表單也建議直接圈選。區域固定於畫面，不會自動追蹤移動的視窗。</p>
+<div class="row"><div><label for="kind">遮罩類型</label><select id="kind"><option value="notification">整塊通知</option><option value="manual">帳密／其他固定區域</option><option value="participant">固定姓名區域＋人物代號</option></select><label for="regionAlias">姓名區域的代號（與下方人物清單一致）</label><input id="regionAlias" placeholder="受測者 A"></div>
+<div><label for="start">開始秒數（相對影片首畫面）</label><input id="start" type="number" min="0" step="0.01" value="0"></div>
+<div><label for="end">結束秒數（留空表示到片尾）</label><input id="end" type="number" min="0" step="0.01"></div></div>
+<canvas id="canvas" width="960" height="540"></canvas>
+<p id="status" role="status">請先選擇影片。紅色區域只是設定預覽。</p><ol id="regions"></ol>
+</section>
+<section><h2>2. 設定姓名與已知敏感內容</h2>
+<label for="people">每行一位受測者；同一人的不同寫法以 | 分隔，代號可省略或用 =&gt; 指定</label>
+<textarea id="people" rows="4" placeholder="王小明|小明 =&gt; 受測者 A&#10;陳小華 =&gt; B小姐"></textarea>
+<p class="note">先生／小姐需由你自行指定。未指定代號時依列序使用受測者 A、B、C；不會推測性別。不同姓名寫法是否同一人，需自行確認。OCR 可能看錯中文姓名；已知姓名欄位請再圈選「固定姓名區域＋人物代號」，依人物出現時間分段設定。</p>
+<label for="literals">已知帳號、住址、密碼或其他必須遮住的字串，每行一項</label>
+<textarea id="literals" rows="4" placeholder="study.user@example.invalid&#10;DemoOnly-NotARealSecret-2026!"></textarea>
+<p class="note">匯出的設定檔含這些原始姓名與敏感字串，請放在 private/，只分享程式，不要將私人設定一起打包。</p>
+</section>
+<section><h2>3. 匯出設定並執行程式</h2>
+<button id="export">下載 config.private.json</button>
+<label for="import">或匯入既有設定繼續編輯</label><input id="import" type="file" accept="application/json,.json">
+<p>匯出後執行：<code>vpf redact private/input.mp4 --config private/config.private.json --output results/redacted.mp4 --audio drop</code></p>
+<p class="note">drop 會移除全部音軌；keep 保留原音軌，不會遮住說話內容。輸出影片仍需逐段檢查漏遮、誤遮及代號一致性。</p>
+</section></main>
+<script>
+'use strict';
+const el=id=>document.getElementById(id), video=el('video'), canvas=el('canvas'), ctx=canvas.getContext('2d');
+let regions=[],drag=null,objectURL=null;
+function letter(i){let s='';for(i++;i;i=Math.floor((i-1)/26))s=String.fromCharCode(65+(i-1)%26)+s;return s;}
+function message(text){el('status').textContent=text;}
+function refresh(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ if(video.readyState>=2)ctx.drawImage(video,0,0,canvas.width,canvas.height);
+ regions.forEach((r,i)=>{const[x,y,x2,y2]=r.rect;ctx.fillStyle='rgba(230,45,70,.35)';ctx.fillRect(x*canvas.width,y*canvas.height,(x2-x)*canvas.width,(y2-y)*canvas.height);ctx.strokeStyle='#d41436';ctx.lineWidth=2;ctx.strokeRect(x*canvas.width,y*canvas.height,(x2-x)*canvas.width,(y2-y)*canvas.height);ctx.fillStyle='#b00025';ctx.font='18px sans-serif';ctx.fillText(String(i+1),x*canvas.width+5,y*canvas.height+22);});
+ if(drag){ctx.strokeStyle='#005ae0';ctx.lineWidth=3;ctx.strokeRect(drag.x*canvas.width,drag.y*canvas.height,(drag.endX-drag.x)*canvas.width,(drag.endY-drag.y)*canvas.height);}
+}
+function list(){el('regions').replaceChildren();regions.forEach((r,i)=>{const li=document.createElement('li');li.textContent=`${i+1}. ${r.kind==='notification'?'通知':r.kind==='participant'?'姓名代號 '+r.replacement:'固定遮罩'}；${r.start} 秒至 ${r.end===null?'片尾':r.end+' 秒'}；${r.rect.map(v=>v.toFixed(3)).join(', ')}`;const b=document.createElement('button');b.textContent='刪除';b.addEventListener('click',()=>{regions.splice(i,1);list();refresh();});li.appendChild(b);el('regions').appendChild(li);});}
+el('file').addEventListener('change',()=>{const file=el('file').files[0];if(!file)return;if(objectURL)URL.revokeObjectURL(objectURL);objectURL=URL.createObjectURL(file);video.src=objectURL;message('影片只在本機開啟。請暫停後圈選區域。');});
+video.addEventListener('loadeddata',()=>{canvas.width=video.videoWidth;canvas.height=video.videoHeight;refresh();});
+video.addEventListener('seeked',refresh);video.addEventListener('pause',refresh);
+function point(event){const r=canvas.getBoundingClientRect();return{x:Math.max(0,Math.min(1,(event.clientX-r.left)/r.width)),y:Math.max(0,Math.min(1,(event.clientY-r.top)/r.height))};}
+canvas.addEventListener('pointerdown',e=>{if(video.readyState<2)return;video.pause();const p=point(e);drag={...p,endX:p.x,endY:p.y};canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;const p=point(e);drag.endX=p.x;drag.endY=p.y;refresh();});
+canvas.addEventListener('pointerup',e=>{if(!drag)return;const p=point(e),x=Math.min(drag.x,p.x),y=Math.min(drag.y,p.y),x2=Math.max(drag.x,p.x),y2=Math.max(drag.y,p.y);drag=null;const start=Number(el('start').value),end=el('end').value===''?null:Number(el('end').value);if(!Number.isFinite(start)||start<0||(end!==null&&(!Number.isFinite(end)||end<=start))){message('請修正時間：結束須晚於開始。');refresh();return;}if((x2-x)*canvas.width<3||(y2-y)*canvas.height<3){refresh();return;}const kind=el('kind').value,replacement=kind==='participant'?el('regionAlias').value.trim():undefined;if(kind==='participant'&&!replacement){message('請填寫此姓名區域的人物代號。');refresh();return;}regions.push({name:'region-'+(regions.length+1),kind,rect:[x,y,x2,y2],start,end,...(replacement?{replacement}:{})});list();refresh();message('已加入區域；可繼續圈選或匯出。');});
+canvas.addEventListener('pointercancel',()=>{drag=null;refresh();});
+el('export').addEventListener('click',()=>{try{const participants=el('people').value.split('\n').map(x=>x.trim()).filter(Boolean).map((line,i)=>{const parts=line.split('=>');if(parts.length>2)throw Error('姓名格式不正確。');return{aliases:parts[0].split('|').map(s=>s.trim()).filter(Boolean),replacement:parts[1]?.trim()||'受測者 '+letter(i)};});const data={schema_version:1,participants,sensitive_literals:el('literals').value.split('\n').map(s=>s.trim()).filter(Boolean),regions,padding:8,low_confidence:.3,languages:['ch_tra','en']};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='config.private.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);message('設定已匯出。此檔含原始姓名與敏感字串，請保留於本機。');}catch(e){message(e.message);}});
+el('import').addEventListener('change',async()=>{try{const f=el('import').files[0];if(!f)return;const d=JSON.parse(await f.text());if(d.schema_version!==1||!Array.isArray(d.regions))throw Error('設定格式不正確。');regions=d.regions;el('people').value=(d.participants||[]).map(p=>p.aliases.join('|')+' => '+p.replacement).join('\n');el('literals').value=(d.sensitive_literals||[]).join('\n');list();refresh();message('已匯入設定；執行程式時會再次驗證格式。');}catch(e){message('無法匯入設定：'+e.message);}});
+</script></html>

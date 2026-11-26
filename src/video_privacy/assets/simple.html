@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="local-token" content="__LOCAL_TOKEN__"><title>影片隱私處理</title>
+<link rel="stylesheet" href="simple.css"><script src="simple.js" defer></script></head>
+<body>
+<section id="startupNotice" class="startup-notice" role="alert">
+<h1>請先啟動影片處理程式</h1>
+<p>這個 HTML 檔不能單獨處理影片。請回到解壓縮後的 <strong>video-privacy-filter</strong> 資料夾：</p>
+<p>Mac：雙擊「啟動影片處理.command」。<br>Windows：雙擊「啟動影片處理.bat」。</p>
+<p>程式會自動開啟可用的處理頁；請在該頁選擇影片，並保持終端機開啟。</p>
+<noscript><p>瀏覽器必須允許 JavaScript 才能使用處理介面。</p></noscript>
+</section>
+<main id="application" hidden>
+<header><span class="brand-icon" aria-hidden="true">▧</span><span>影片隱私處理</span><span class="local-label">本機執行</span></header>
+<section class="intro"><p class="eyebrow">簡單三步，處理影片中的敏感文字</p>
+<h1>放入影片，<br>剩下交給程式。</h1>
+<p>自動尋找姓名、email、證號與帳密，<br class="desktop-break">套用你指定的柔化模糊效果。</p></section>
+<section class="card" aria-label="影片處理">
+<div id="uploadView">
+<input id="videoFile" class="visually-hidden" type="file" accept=".mp4,.mov,.m4v,.webm,.mkv,.avi,video/*" tabindex="-1">
+<label id="dropzone" for="videoFile" tabindex="0" role="button" aria-label="選擇影片或拖入影片" aria-disabled="false">
+<svg class="upload-icon" width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true"><rect x="6" y="8" width="40" height="36" rx="9" stroke="currentColor" stroke-width="2"/><path d="M26 34V18m-6 6 6-6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<strong id="fileTitle">把影片拖到這裡</strong><span id="fileHint">或點一下選擇影片</span>
+<span class="formats">MP4、MOV 等影片格式，最大 2 GB</span></label>
+<div id="error" class="error" role="alert" hidden></div>
+<button id="start" class="primary" type="button" disabled>開始自動處理</button>
+<p class="audio-note">輸出會移除全部聲音，避免保留未處理的口述個資。</p>
+</div>
+<div id="progressView" hidden aria-live="polite">
+<div class="spinner" aria-hidden="true"></div><h2 id="phaseTitle">正在準備影片</h2>
+<p id="phaseDetail">請保持此視窗與本機程式開啟。</p>
+<progress id="progress" max="100" value="0" aria-label="處理進度"></progress>
+<p id="progressText" class="progress-text"></p>
+</div>
+<div id="doneView" hidden>
+<span class="complete-icon" aria-hidden="true">✓</span><h2>處理完成，請先預覽</h2>
+<p>確認姓名、帳密與通知沒有漏遮後，再分享影片。</p>
+<video id="resultVideo" controls playsinline preload="metadata" aria-label="處理後的影片預覽"></video>
+<a id="download" class="primary" href="/api/download" download="processed-video.mp4">下載處理後影片</a>
+<button id="again" class="secondary" type="button">處理下一支</button>
+<p class="audio-note">這支影片不含音訊；處理下一支前請先下載。</p>
+</div>
+</section>
+<footer><p>影片留在這台電腦，處理結束後刪除暫存原片。</p>
+<p>自動辨識與模糊仍可能漏遮，完成後請先檢查。首次使用會下載約 3 GB 所需檔案。</p></footer>
+</main></body></html>

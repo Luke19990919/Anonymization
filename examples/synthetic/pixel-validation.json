@@ -1,0 +1,32 @@
+{
+  "scope": "bundled synthetic clip only; not a detection accuracy benchmark",
+  "frames": 12,
+  "notification_single_frame_covered": true,
+  "password_single_frame_covered": true,
+  "gaussian_blur_regions": {
+    "notification": {
+      "max_edge_strength_ratio": 0.008500821649426988
+    },
+    "password": {
+      "max_edge_strength_ratio": 0.0018111095367864091
+    },
+    "email": {
+      "max_edge_strength_ratio": 0.002286552681729315
+    },
+    "id": {
+      "max_edge_strength_ratio": 0.0029420412587374575
+    },
+    "address": {
+      "max_edge_strength_ratio": 0.0036537137501319217
+    },
+    "model_only_english_person": {
+      "max_edge_strength_ratio": 0.00465100261791495
+    }
+  },
+  "retained_footer_max_mean_error": 0.3894226579520697,
+  "retained_header_max_mean_error": 0.36944927536231886,
+  "same_participant_return_error": 0.023879716981132077,
+  "different_participant_pixel_difference": 3.441357114779874,
+  "model_only_person_mask_applied": true,
+  "raw_sensitive_text_absent_from_report": true
+}

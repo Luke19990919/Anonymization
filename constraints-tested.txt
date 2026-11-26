@@ -1,0 +1,12 @@
+# Primary package versions exercised on macOS Apple Silicon / Python 3.11.18.
+# OPF source is pinned separately in pyproject.toml.
+easyocr==1.7.2
+av==18.1.1
+imageio-ffmpeg==0.8.1
+Pillow==13.0.0
+numpy==2.4.6
+torch==2.15.0
+torchvision==0.29.2
+opencv-python-headless==5.1.0.95
+
+scipy==1.17.1

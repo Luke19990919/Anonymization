@@ -1,0 +1,156 @@
+{
+  "version": "0.2.3",
+  "typing": {
+    "frames": 480,
+    "targets": 708,
+    "covered_at_95pct": 708,
+    "misses": [],
+    "empty_account_frames_masked": [],
+    "empty_password_frames_masked": [],
+    "seconds": 374.93,
+    "source": "fictional typing fixture; full-frame actual OCR and model inference; no gold passed to detector"
+  },
+  "speed": {
+    "baseline_version": "0.2.2",
+    "accelerated_version": "0.2.3",
+    "baseline_seconds": 1313.02,
+    "accelerated_seconds": 374.93,
+    "speedup": 3.5,
+    "scope": "same 20-second 480-frame fictional typing clip on this Mac; not a universal performance guarantee",
+    "frame_sampling": "none",
+    "ocr_device": "mps",
+    "ocr_crop_cache_hits": 4442,
+    "ocr_crop_cache_misses": 753,
+    "ocr_cpu_fallbacks": 0
+  },
+  "dataset_cases": [
+    {
+      "id": "01",
+      "seconds": 20.51,
+      "gold_target_instances": 144,
+      "covered_at_95pct": 144,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 0
+    },
+    {
+      "id": "02",
+      "seconds": 20.49,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "03",
+      "seconds": 27.48,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 3
+    },
+    {
+      "id": "04",
+      "seconds": 23.57,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "05",
+      "seconds": 28.41,
+      "gold_target_instances": 1,
+      "covered_at_95pct": 1,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": 0.0,
+      "inferred_participants": 0
+    },
+    {
+      "id": "06",
+      "seconds": 26.15,
+      "gold_target_instances": 24,
+      "covered_at_95pct": 24,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": 0.0,
+      "inferred_participants": 0
+    },
+    {
+      "id": "07",
+      "seconds": 58.23,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "08",
+      "seconds": 19.56,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "09",
+      "seconds": 22.06,
+      "gold_target_instances": 144,
+      "covered_at_95pct": 144,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 0
+    },
+    {
+      "id": "10",
+      "seconds": 19.23,
+      "gold_target_instances": 0,
+      "covered_at_95pct": 0,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": 0.0,
+      "inferred_participants": 0
+    }
+  ],
+  "identity_checks": [
+    {
+      "id": "02",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "errors": []
+    },
+    {
+      "id": "03",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "errors": []
+    },
+    {
+      "id": "04",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "errors": []
+    },
+    {
+      "id": "07",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "errors": []
+    },
+    {
+      "id": "08",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "errors": []
+    }
+  ],
+  "geometry_equivalence": {
+    "compared_real_input_surfaces": 18,
+    "identical": true,
+    "old_seconds": 0.7325051259540487,
+    "new_seconds": 0.274184001958929
+  }
+}

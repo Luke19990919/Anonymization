@@ -1,0 +1,50 @@
+{
+  "program_version": "0.2.7rc2",
+  "frames": 24,
+  "target_instances": 3,
+  "misses": [],
+  "empty_mask_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "gold_passed_to_detector": false,
+  "actual_model_inference": true,
+  "scope": "fictional branded LINE card; metadata description corrected; masks and criteria unchanged",
+  "performance": {
+    "stage_seconds": {
+      "decode_seconds": 0.01064191599834885,
+      "pixel_conversion_seconds": 0.0068350859964994015,
+      "guard_hash_seconds": 0.0302455000091868,
+      "ocr_roundtrip_seconds": 3.5083902909991593,
+      "classification_rules_seconds": 6.145474918001128,
+      "mask_render_seconds": 0.5588073359995178,
+      "encode_mux_seconds": 0.04890362199694209,
+      "final_mux_seconds": 0.11224025000046822,
+      "output_verification_seconds": 0.009483625000939355
+    },
+    "processing_seconds": 9.822503958999732,
+    "width": 800,
+    "height": 600,
+    "scope": "process_video only; excludes model initialization and final delivery copy",
+    "nested_stages": "OCR worker stages and NLP are subsets of parent timings",
+    "ocr_prefetch_enabled": true,
+    "overlap": "OCR and decoding may overlap classification/rendering; stage sums may exceed wall time"
+  }
+}

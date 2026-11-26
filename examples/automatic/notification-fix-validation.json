@@ -1,0 +1,11 @@
+[
+  {
+    "id": "06",
+    "seconds": 106.61,
+    "gold_target_instances": 24,
+    "covered_at_95pct": 24,
+    "misses": [],
+    "negative_frame_mean_mask_fraction": 0.0,
+    "inferred_participants": 0
+  }
+]

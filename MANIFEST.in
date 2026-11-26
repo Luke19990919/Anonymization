@@ -1,0 +1,28 @@
+include README.md THIRD_PARTY_NOTICES.md VALIDATION.md constraints-tested.txt install.sh install.ps1
+recursive-include src/video_privacy/assets *
+recursive-include tests *.py
+recursive-include examples *.json *.mp4 *.png
+include ADVANCED.md start-web.sh *.command *.bat
+include release-manifest.json
+recursive-include examples *.jpg
+recursive-include examples *.md
+
+include launch-homepage.py
+
+include CICD.md
+recursive-include .github *.yml
+recursive-include tests *.cjs
+
+include HANDOFF.md
+
+include acceptance-status.json
+recursive-include scripts *.py
+
+include MAINTENANCE.md
+
+include assets-lock.json
+recursive-include schemas *.json
+recursive-include templates *.md
+recursive-include examples *.py
+
+include OPEN_SOURCE_REVIEW.md PROJECT_STATUS.md

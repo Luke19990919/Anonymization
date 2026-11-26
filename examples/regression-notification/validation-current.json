@@ -1,0 +1,41 @@
+{
+  "program_version": "0.2.7rc3",
+  "frames": 24,
+  "target_instances": 3,
+  "misses": [],
+  "empty_mask_frames": [],
+  "gold_passed_to_detector": false,
+  "actual_model_inference": true,
+  "scope": "fictional branded notification fixture",
+  "performance": {
+    "stage_seconds": {
+      "decode_seconds": 0.0031830819934839383,
+      "pixel_conversion_seconds": 0.001970708995941095,
+      "guard_hash_seconds": 0.01376704101494397,
+      "ocr_roundtrip_seconds": 1.567813750993082,
+      "classification_rules_seconds": 1.1297366669969051,
+      "mask_render_seconds": 0.061849582994909724,
+      "encode_mux_seconds": 0.021494960008567432,
+      "final_mux_seconds": 0.0392022089981765,
+      "output_verification_seconds": 0.005607499999314314
+    },
+    "processing_seconds": 2.639082707999478,
+    "width": 800,
+    "height": 600,
+    "scope": "process_video only; excludes model initialization and final delivery copy",
+    "nested_stages": "OCR worker stages and NLP are subsets of parent timings",
+    "ocr_prefetch_enabled": true,
+    "overlap": "OCR and decoding may overlap classification/rendering; stage sums may exceed wall time"
+  },
+  "empty_mask_diagnostics": [],
+  "ocr_statistics": {
+    "ocr_device": "mps",
+    "ocr_cpu_fallbacks": 0,
+    "ocr_crop_cache_hits": 5,
+    "ocr_crop_cache_misses": 11
+  },
+  "mask_applications_by_reason": {
+    "auto_notification": 3,
+    "notification_motion_guard": 3
+  }
+}

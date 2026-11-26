@@ -1,0 +1,128 @@
+{
+  "scope": "10 fictional 6-second screen recordings; coordinates evaluated after inference, never supplied to detection",
+  "criterion": "at least 95% of each gold target rectangle covered by predicted mask core; does not prove unreadability or irreversible removal",
+  "cases": [
+    {
+      "id": "01",
+      "seconds": 85.5,
+      "gold_target_instances": 144,
+      "covered_at_95pct": 144,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 0
+    },
+    {
+      "id": "02",
+      "seconds": 91.47,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "03",
+      "seconds": 146.65,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 3
+    },
+    {
+      "id": "04",
+      "seconds": 132.58,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "05",
+      "seconds": 227.78,
+      "gold_target_instances": 1,
+      "covered_at_95pct": 1,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": 0.001549479166666667,
+      "inferred_participants": 0
+    },
+    {
+      "id": "06",
+      "seconds": 281.19,
+      "gold_target_instances": 24,
+      "covered_at_95pct": 24,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": 0.0015494791666666667,
+      "inferred_participants": 0
+    },
+    {
+      "id": "07",
+      "seconds": 266.92,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "08",
+      "seconds": 113.51,
+      "gold_target_instances": 288,
+      "covered_at_95pct": 288,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 1
+    },
+    {
+      "id": "09",
+      "seconds": 118.09,
+      "gold_target_instances": 144,
+      "covered_at_95pct": 144,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": null,
+      "inferred_participants": 0
+    },
+    {
+      "id": "10",
+      "seconds": 103.2,
+      "gold_target_instances": 0,
+      "covered_at_95pct": 0,
+      "misses": [],
+      "negative_frame_mean_mask_fraction": 0.0,
+      "inferred_participants": 0
+    }
+  ],
+  "identity_cases": [
+    {
+      "id": "02",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "failures": []
+    },
+    {
+      "id": "03",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "failures": []
+    },
+    {
+      "id": "04",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "failures": []
+    },
+    {
+      "id": "07",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "failures": []
+    },
+    {
+      "id": "08",
+      "name_instances": 72,
+      "correct_alias": 72,
+      "failures": []
+    }
+  ]
+}

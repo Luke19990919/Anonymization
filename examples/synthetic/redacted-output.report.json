@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "program_version": "0.1.2",
+  "frames_processed": 12,
+  "mask_style": "gaussian_blur",
+  "blur_radius_min_pixels": 24,
+  "blur_radius_max_pixels": 80,
+  "blur_feather_pixels": 16,
+  "blur_uses_original_pixels": true,
+  "irreversible_redaction_guaranteed": false,
+  "frames_reusing_identical_ocr": 5,
+  "distinct_frames_without_ocr_boxes": 0,
+  "mask_applications_by_reason": {
+    "notification": 12,
+    "manual": 12,
+    "participant_region": 12,
+    "known_or_cross_box": 36,
+    "rule": 12,
+    "model": 12
+  },
+  "audio_policy": "drop",
+  "speech_redacted": false,
+  "notifications": "configured regions only",
+  "ocr_languages": [
+    "ch_tra",
+    "en"
+  ],
+  "frame_sampling": "none; every decoded frame processed",
+  "timestamps": "source presentation timestamps preserved",
+  "review_required": true,
+  "raw_text_in_report": false
+}
