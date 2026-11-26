@@ -73,4 +73,18 @@ macOS 雙擊「啟動影片處理.command」或執行 sh start-web.sh。launch-h
 
 ## 9. 遠端模型差異追查
 
-0.2.7rc2 遠端通知實例無漏遮，但13個空背景畫面仍有時間窗遮罩；本機 MPS 與 CPU 同例皆未重現。0.2.7rc3 將純白特例泛化為任何完全均勻 RGB 區域；單一畫素不同仍保護，24幀通知標註與零誤遮門檻未變。新增數值／虛構影片 CI artifact，繼續核對遠端。最新本機194項與兩套模型回歸通過，正式發布仍阻擋。
+目前凍結範圍：只修實際模型回歸 CI，不修改服務、候選包、發布流程或新增功能。遵守根目錄 AGENTS.md；tests/ 的驗收資料與預期值不可修改。
+
+RC3 遠端結果：24幀、3個通知實例核心完整覆蓋，誤遮幀為7、8、9、11、12、13、15、16、17、18、19、20、21。使用CI自行產生的原始虛構影片後，已在本機CPU重現完全相同的13幀誤遮；不是只能在遠端觀察的問題。
+
+本機重現證據：.runtime/ci-reproduction-rc3/validation.json。CI原始證據：.runtime/ci-rc3/f1a1e69ca114453296c998532dfb2366/notifications/validation.json 及 input.mp4、gold.json。這些均為虛構資料與暫存，不能提交。正確Python與模型位置記於忽略目錄下的 .runtime/maintenance-environment.json。
+
+已確認：差異像素位於原卡片外緣的編碼殘留區域，時間窗走廊仍因此加罩。本機修正將像素定位的卡片本體與模糊外擴區分開判定；卡片本體有單一變動像素、滑入／滑出殘留卡片色或邊框色、未知幾何時仍保留保護。未修改 tests/、標註或驗收門檻。
+
+使用逐位元組相同的 CI input.mp4 與 gold.json 執行實際 CPU EasyOCR 與 Privacy Filter，24 幀、3 個通知實例，漏遮 0、誤遮 0（原誤遮 13）。證據：.runtime/ci-reproduction-fixed/validation.json；標註未傳入偵測器。完整 pytest 194 項與 Node ETA 通過；四種局部保護檢查通過。沙箱內 11 項網頁測試受連接埠權限限制，沙箱外完整重跑通過。這些結果僅代表此回歸案例，遠端修正尚未驗證，正式發布仍受獨立驗收阻擋。
+
+使用者期末截止日期為 1/21，依目前日期暫按 2027/1/21 記錄；最低展示為完整個資遮蔽與通知彈窗遮蔽。本輪不更動網頁、版本、分享包與發布流程。
+
+重跑需先將 input.mp4 與 gold.json 複製到新的 .runtime 子目錄，避免覆寫既有結果；再以正確環境執行 VPF_OCR_DEVICE=cpu PYTHONPATH=src python scripts/validate_stacked.py REPRO_DIR --models MODELS_DIR。完成後必跑 python -m pytest -q 與 node tests/test_eta.cjs。
+
+目前同一通知問題此前已有3輪遠端CI。依新規則，後續推送前必須另行取得使用者授權；不得自行重置推送次數，也不得在對話中等待遠端模型CI。根目錄規則與本節先做本機提交，不推送。

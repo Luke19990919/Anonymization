@@ -21,6 +21,8 @@ class Mask:
     rect: tuple[int, int, int, int]
     reason: str
     replacement: str | None = None
+    visibility_rect: tuple[int,int,int,int] | None = None
+    visibility_colors: tuple[tuple[int,int,int],...] | None = None
 
 
 class TextClassifier(Protocol):

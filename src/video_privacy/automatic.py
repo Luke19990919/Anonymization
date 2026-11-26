@@ -57,6 +57,8 @@ def notification_regions(rgb: np.ndarray,boxes: list[Box]) -> list[Mask]:
         near=labels[max(0,y1-5):min(height,y2+5),max(0,x1-5):min(width,x2+5)]
         ids,counts=np.unique(near[near>0],return_counts=True)
         candidate=None
+        visibility_rect=None
+        visibility_colors=None
         if len(ids):
             selected=int(ids[int(counts.argmax())])
             slices=ndimage.find_objects(labels,max_label=selected)[selected-1]
@@ -64,7 +66,11 @@ def notification_regions(rgb: np.ndarray,boxes: list[Box]) -> list[Mask]:
                 ys,xs=slices
                 w,h=xs.stop-xs.start,ys.stop-ys.start
                 if max(100,x2-x1)<=w<width*.72 and max(45,(y2-y1)*1.6)<=h<height*.55:
-                    candidate=padded((xs.start,ys.start,xs.stop,ys.stop),width,height,10)
+                    visibility_rect=(xs.start,ys.start,xs.stop,ys.stop)
+                    background=tuple(int(channel) for channel in color)
+                    border=tuple(int(channel) for channel in rgb[(ys.start+ys.stop)//2,max(0,xs.start-1)])
+                    visibility_colors=(background,border)
+                    candidate=padded(visibility_rect,width,height,10)
         if candidate is None and explicit:
             # Geometry fallback for corner notifications whose background is not a flat card.
             if x1>width*.6:
@@ -76,7 +82,8 @@ def notification_regions(rgb: np.ndarray,boxes: list[Box]) -> list[Mask]:
         if candidate is not None and not (candidate[0]<=x1 and candidate[1]<=y1 and candidate[2]>=x2 and candidate[3]>=y2):
             candidate=None
         if candidate is not None and candidate not in [m.rect for m in result]:
-            result.append(Mask(candidate,'auto_notification'))
+            result.append(Mask(candidate,'auto_notification',visibility_rect=visibility_rect,
+                               visibility_colors=visibility_colors))
     return result
 
 
