@@ -54,7 +54,7 @@ def test_pipeline_preserves_masks_timestamps_and_single_frame_event(tmp_path: Pa
         def masks(self,boxes,width,height):
             self.calls+=1
             return [Mask((40,4,62,26),'auto_notification')] if self.calls==2 else []
-    source=tmp_path/'source.mp4';create_video(source)
+    source=tmp_path/'source.mp4';create_video(source,background_detail=True)
     observed=[]
     timestamps=[]
     for enabled in (False,True):

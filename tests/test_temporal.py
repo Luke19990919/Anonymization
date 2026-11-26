@@ -7,7 +7,9 @@ from video_privacy.temporal import NotificationLookahead,ProtectedFrame,merge_co
 
 
 def frame(t: float,masks: list[Mask] | None=None) -> ProtectedFrame:
-    return ProtectedFrame(np.zeros((100,200,3),dtype=np.uint8),t,round(t*1000),Fraction(1,1000),[],masks or [])
+    rgb=np.zeros((100,200,3),dtype=np.uint8)
+    rgb[20,150]=1  # visible detail, including before a delayed recognition
+    return ProtectedFrame(rgb,t,round(t*1000),Fraction(1,1000),[],masks or [])
 
 
 def notification() -> Mask:
@@ -99,7 +101,7 @@ def test_render_pipeline_backfills_future_detection_and_keeps_vfr_order(tmp_path
         def masks(self,boxes,width,height):
             self.calls+=1
             return [Mask((40,4,62,26),'auto_notification')] if self.calls==2 else []
-    source=tmp_path/'source.mp4';create_video(source)
+    source=tmp_path/'source.mp4';create_video(source,background_detail=True)
     observed=[]
     result=process_video(source,tmp_path/'result.mp4',tmp_path/'report.json',Config((),(),()),
                          DelayedDetector(),NoBoxes(),'drop',
@@ -128,3 +130,11 @@ def test_one_changed_pixel_in_white_background_retains_notification_protection()
     first=frame(0);first.rgb[:]=255;first.rgb[20,150]=254
     guard.push(first);guard.push(frame(.5,[notification()]))
     assert first.guards
+
+
+@pytest.mark.parametrize('color',[(0,0,0),(180,180,180),(254,254,254),(17,18,23)])
+def test_any_exact_uniform_background_needs_no_temporal_guard(color) -> None:
+    guard=NotificationLookahead(.75)
+    before=frame(0);before.rgb[:]=color
+    guard.push(before);guard.push(frame(.5,[notification()]))
+    assert not before.guards

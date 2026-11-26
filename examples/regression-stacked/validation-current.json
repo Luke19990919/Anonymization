@@ -1,5 +1,5 @@
 {
-  "program_version": "0.2.7rc2",
+  "program_version": "0.2.7rc3",
   "frames": 32,
   "target_instances": 50,
   "misses": [],
@@ -9,22 +9,33 @@
   "scope": "fictional stacked phone/email fixture; not unknown-video acceptance",
   "performance": {
     "stage_seconds": {
-      "decode_seconds": 0.016951582991168834,
-      "pixel_conversion_seconds": 0.008169084012479289,
-      "guard_hash_seconds": 0.0236477490143443,
-      "ocr_roundtrip_seconds": 11.82868766599131,
-      "classification_rules_seconds": 6.6952722480054945,
-      "mask_render_seconds": 0.4061701240061666,
-      "encode_mux_seconds": 0.0629500800059759,
-      "final_mux_seconds": 0.2017566659997101,
-      "output_verification_seconds": 0.01807941700099036
+      "decode_seconds": 0.0063882530193950515,
+      "pixel_conversion_seconds": 0.005557122993195662,
+      "guard_hash_seconds": 0.02295391100778943,
+      "ocr_roundtrip_seconds": 6.356095080998784,
+      "classification_rules_seconds": 3.2745911219935806,
+      "mask_render_seconds": 0.280990914983704,
+      "encode_mux_seconds": 0.03523433400187059,
+      "final_mux_seconds": 0.0787025409990747,
+      "output_verification_seconds": 0.008048708998103393
     },
-    "processing_seconds": 16.21966654100106,
+    "processing_seconds": 7.815891500002181,
     "width": 900,
     "height": 600,
     "scope": "process_video only; excludes model initialization and final delivery copy",
     "nested_stages": "OCR worker stages and NLP are subsets of parent timings",
     "ocr_prefetch_enabled": true,
     "overlap": "OCR and decoding may overlap classification/rendering; stage sums may exceed wall time"
+  },
+  "empty_mask_diagnostics": [],
+  "ocr_statistics": {
+    "ocr_device": "mps",
+    "ocr_cpu_fallbacks": 0,
+    "ocr_crop_cache_hits": 185,
+    "ocr_crop_cache_misses": 56
+  },
+  "mask_applications_by_reason": {
+    "auto_phone_field": 30,
+    "auto_account_field": 20
   }
 }

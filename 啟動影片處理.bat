@@ -6,7 +6,7 @@ if not exist ".venv\Scripts\python.exe" (
 )
 .venv\Scripts\python.exe scripts/fetch_assets.py
 if errorlevel 1 goto error
-.venv\Scripts\python.exe -c "import video_privacy; assert video_privacy.__version__ == '0.2.7rc2'" >nul 2>&1
+.venv\Scripts\python.exe -c "import video_privacy; assert video_privacy.__version__ == '0.2.7rc3'" >nul 2>&1
 if errorlevel 1 (
   .venv\Scripts\python.exe -m pip install -c constraints-tested.txt .
   if errorlevel 1 goto error

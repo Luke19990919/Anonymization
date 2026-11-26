@@ -14,7 +14,7 @@
 
 ## 2. 實作與啟動
 
-套件版本目前為 0.2.7rc2（待驗收）；主要程式位於 src/video_privacy。影片解碼／編碼使用 PyAV，OCR 使用 EasyOCR 子程序，文字個資分類使用 OpenAI Privacy Filter，加上欄位、畫素與通知規則。並非只處理生成測試片，但未知介面的準確度未獲保證。
+套件版本目前為 0.2.7rc3（待驗收）；主要程式位於 src/video_privacy。影片解碼／編碼使用 PyAV，OCR 使用 EasyOCR 子程序，文字個資分類使用 OpenAI Privacy Filter，加上欄位、畫素與通知規則。並非只處理生成測試片，但未知介面的準確度未獲保證。
 
 macOS 雙擊「啟動影片處理.command」或執行 sh start-web.sh。launch-homepage.py 等待服務身分及版本檢查後開頁；服務獨立於終端機執行。重新開機後須再雙擊啟動檔，不是自動登入常駐。Windows 使用 .bat 且保留視窗；Windows 尚未實機驗證。
 
@@ -24,7 +24,7 @@ macOS 雙擊「啟動影片處理.command」或執行 sh start-web.sh。launch-h
 
 ## 3. 驗證與效能現況
 
-最近本機 Python 測試 190 項通過；Node 時間估算檢查通過。這些不是任意影片無漏遮的證明。
+最近本機 Python 測試 194 項通過；Node 時間估算檢查通過。這些不是任意影片無漏遮的證明。
 
 0.2.5 實際模型推論：虛構登入片 288 幀，144 幀明文全數核心覆蓋、144 幀圓點無額外密碼遮罩、288 幀帳號全數覆蓋，開關顯示第一幀符合政策。約 73.13 秒，前版 74.04 秒，沒有可靠加速證據。證據：examples/automatic/password-display-validation.json。
 
@@ -70,3 +70,7 @@ macOS 雙擊「啟動影片處理.command」或執行 sh start-web.sh。launch-h
 已接到使用者指定 GitHub 儲存庫 https://github.com/Luke19990919/Anonymization，以獨立 codex/fix-first-character-redaction 分支交付。尚須核對實際 CI 結果；沒有常駐修復代理或 RSI 已啟用的證據。新的可重跑工具為 scripts/verify_cycle.py，跨模型代理模板為 templates/maintenance-agent.md。
 
 本機 Git HTTPS 尚無登入憑證，來源可由已授權 GitHub 連接器交付；官方字型由固定提交與 SHA-256 取得，已與原字型逐位元組一致。原始碼不提交大型二進位示例；分享候選包仍附字型及虛構影片。使用者影片及所有私人診斷結果仍排除。
+
+## 9. 遠端模型差異追查
+
+0.2.7rc2 遠端通知實例無漏遮，但13個空背景畫面仍有時間窗遮罩；本機 MPS 與 CPU 同例皆未重現。0.2.7rc3 將純白特例泛化為任何完全均勻 RGB 區域；單一畫素不同仍保護，24幀通知標註與零誤遮門檻未變。新增數值／虛構影片 CI artifact，繼續核對遠端。最新本機194項與兩套模型回歸通過，正式發布仍阻擋。

@@ -25,13 +25,14 @@ class NoBoxes:
         return []
 
 
-def create_video(path: Path, timestamps: tuple[int, ...] = (0, 100, 350)) -> None:
+def create_video(path: Path, timestamps: tuple[int, ...] = (0, 100, 350), *, background_detail: bool=False) -> None:
     with av.open(str(path), 'w') as output:
         stream = output.add_stream('libx264', rate=4)
         stream.width, stream.height, stream.pix_fmt = 64, 64, 'yuv420p'
         stream.time_base = stream.codec_context.time_base = Fraction(1, 1000)
         for index, pts in enumerate(timestamps):
             rgb = np.full((64,64,3), 180, dtype=np.uint8)
+            if background_detail:rgb[10,50]=0
             if index == 1:
                 rgb[4:26,4:26] = [255,20,20]
             frame = av.VideoFrame.from_ndarray(rgb,format='rgb24')

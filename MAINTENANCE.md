@@ -1,6 +1,6 @@
 # 維護與發布狀態（2026-11-26）
 
-目前為 0.2.7rc2，已知失敗尚未解除，正式發布被阻擋。測試通過不代表私人影片驗收通過。
+目前為 0.2.7rc3，已知失敗尚未解除，正式發布被阻擋。測試通過不代表私人影片驗收通過。
 
 ## 已完成與可重跑工具
 
@@ -39,3 +39,5 @@ macOS 可使用 `python scripts/build_vision.py` 編譯 Apple Vision OCR helper�
 已修復並以實際模型驗證上方標籤表單的首字漏遮、跨列 email 誤遮與純白背景的通知時間窗誤遮。190項測試及兩套實際模型回歸通過。CI/CD 已開始接到使用者指定的 Anonymization 儲存庫；GitHub 實際執行結果另查，不能只看 workflow 檔案。
 
 verify_cycle.py 會自動執行回歸並回報 regression_passed 與 release_allowed；它不會自行呼叫修復 AI，repair_executor_connected 目前為 false。模板、CI 與一般修 bug 不等於 RSI。搜尋、候選窗、非均勻背景通知與獨立驗收仍未完成。
+
+0.2.7rc3 新增均勻 RGB 背景保護走廊排除與遠端診斷資料；194項本機測試及實際模型回歸通過。遠端0.2.7rc2通知誤遮未重現於本機，保持失敗證據，繼續由CI驗證修正。

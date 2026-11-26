@@ -26,11 +26,13 @@ jobs:
           node-version: '22'
       - run: python scripts/fetch_assets.py
       - run: python -m pip install '.[test]'
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
+        id: public-model-cache
         with:
           path: .runtime/models
-          key: public-models-${{ runner.os }}-${{ hashFiles('src/video_privacy/models.py', 'pyproject.toml') }}
+          key: public-models-${{ runner.os }}-${{ hashFiles('src/video_privacy/models.py', 'constraints-tested.txt') }}
       - run: python -m video_privacy.cli prepare-models --models .runtime/models
+        id: prepare-public-models
       - run: python scripts/verify_cycle.py --models .runtime/models
       - uses: actions/upload-artifact@v4
         if: always()
@@ -40,3 +42,12 @@ jobs:
             .runtime/verify-cycles/*/result.json
             .runtime/verify-cycles/*/fixture/validation.json
             .runtime/verify-cycles/*/notifications/validation.json
+            .runtime/verify-cycles/*/notifications/input.mp4
+            .runtime/verify-cycles/*/notifications/output.mp4
+            .runtime/verify-cycles/*/notifications/output.report.json
+            .runtime/verify-cycles/*/notifications/gold.json
+      - uses: actions/cache/save@v4
+        if: always() && steps.prepare-public-models.outcome == 'success' && steps.public-model-cache.outputs.cache-hit != 'true'
+        with:
+          path: .runtime/models
+          key: public-models-${{ runner.os }}-${{ hashFiles('src/video_privacy/models.py', 'constraints-tested.txt') }}

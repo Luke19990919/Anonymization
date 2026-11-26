@@ -1,9 +1,9 @@
 {
-  "version": "0.2.7rc2",
+  "version": "0.2.7rc3",
   "date": "2026-11-26",
   "tested_platform": "macOS-27.2.1-arm64-arm-64bit",
   "python": "3.11.18",
-  "tests_passed": 190,
+  "tests_passed": 194,
   "real_model_synthetic_video": "v0.2.4: two new 288-frame clips, 742 target instances fully covered; v0.2.3 11-clip records retained as historical evidence",
   "privacy_filter_source_revision": "f7f00ca7fb869683eb732c010299d901457f19c3",
   "privacy_filter_model_revision": "7ffa9a043d54d1be65afb281eddf0ffbe629385b",
@@ -803,7 +803,7 @@
     "experimental_search_context_default": false,
     "apple_vision_default": false
   },
-  "current_validation_scope": "190 Python tests, Node ETA, actual EasyOCR/Privacy Filter synthetic stacked-field and single-frame branded notification regressions; not global privacy acceptance",
+  "current_validation_scope": "194 Python tests, Node ETA, actual EasyOCR/Privacy Filter synthetic stacked-field and single-frame branded notification regressions; not global privacy acceptance",
   "experimental_search_failure": "eight-frame rendered-output diagnostic still loses field location under alias/capture overlays and misses suggestion text; default remains disabled",
   "field_regression": {
     "frames": 32,
@@ -821,8 +821,10 @@
     "empty_frame_false_masks_after": 0,
     "scope": "exact white background only"
   },
-  "verified_cycle_source_sha256": "64164712f104403b9d276d8e1943d74d71599e60d95c0be08e867aaa7349db67",
+  "verified_cycle_source_sha256": "2e54770b3c6c53c8f6f52d55dff94a5b99030bb1082cf46ed4e459e58a777136",
   "repair_executor_connected": false,
   "remote_repository": "https://github.com/Luke19990919/Anonymization",
-  "ci_execution_verified": false
+  "ci_execution_verified": true,
+  "ci_status": "unit/ETA/build passed; rc2 remote field regression passed but notification background regression failed; rc3 uniform-color fix awaits CI",
+  "notification_uniform_background_policy": "skip only exactly uniform RGB corridors; one differing pixel retains guard; no tolerance"
 }

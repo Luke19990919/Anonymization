@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "video-privacy-filter"
-version = "0.2.7rc2"
+version = "0.2.7rc3"
 description = "Local video text masking with EasyOCR and OpenAI Privacy Filter"
 readme = "README.md"
 requires-python = ">=3.11,<3.13"

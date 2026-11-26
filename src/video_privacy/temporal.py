@@ -43,7 +43,7 @@ class NotificationLookahead:
         self.bytes=0
         self.peak_bytes=0
         self.protected_frames=0
-        self.uniform_white_guards_skipped=0
+        self.uniform_color_guards_skipped=0
 
     def _corridors(self,item: ProtectedFrame) -> list[Mask]:
         if self.seconds==0:return []
@@ -59,10 +59,10 @@ class NotificationLookahead:
         for mask in masks:
             x1,y1,x2,y2=mask.rect
             patch=item.rgb[y1:y2,x1:x2]
-            # Exact all-white pixels contain no visible text. A single changed
+            # Exact uniform-color pixels contain no visible text. A single changed
             # pixel retains protection; no tolerance or downsample can hide onset.
-            if patch.size and np.all(patch==255):
-                self.uniform_white_guards_skipped+=1
+            if patch.size and np.all(patch==patch[0,0]):
+                self.uniform_color_guards_skipped+=1
             else:
                 result.append(mask)
         return result
@@ -103,6 +103,6 @@ class NotificationLookahead:
         return {'notification_temporal_protection':{'enabled':self.seconds>0,
                 'direction':'right_edge_horizontal_corridor','lookback_seconds':self.seconds,
                 'linger_seconds':self.seconds,'guarded_frames':self.protected_frames,
-                'uniform_white_guards_skipped':self.uniform_white_guards_skipped,
+                'uniform_color_guards_skipped':self.uniform_color_guards_skipped,
                 'peak_raw_frame_buffer_bytes':self.peak_bytes,'raw_frames_spooled_to_disk':False,
                 'scope':'recognized right-edge notifications only; short entry/exit; may cover background before and after'}}
